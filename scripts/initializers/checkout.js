@@ -61,4 +61,24 @@ function FulcrumShipping() {
 }
 
 await initializeDropin(async () => {
-  setFetchGrap
+  setFetchGraphQlHeaders((prev) => ({ ...prev, ...getHeaders('checkout') }));
+
+  const labels = await fetchPlaceholders();
+  const langDefinitions = {
+    default: {
+      ...labels,
+    },
+  };
+
+  return initializers.mountImmediately(async () => {
+    const result = await initialize();
+
+    const main = document.querySelector('main');
+    if (main && !document.querySelector('#fulcrum-shipping-methods')) {
+      const container = document.createElement('div');
+      container.id = 'fulcrum-shipping-methods';
+      main.prepend(container);
+      render(h(FulcrumShipping, {}), container);
+    }
+alert('FD');
+    return
