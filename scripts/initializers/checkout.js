@@ -13,6 +13,6 @@ await initializeDropin(async () => {
       ...labels,
     },
   };
-  alert();
+  //alert();
   return initializers.mountImmediately(initialize, { langDefinitions });
 })();
